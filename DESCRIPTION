@@ -1,0 +1,28 @@
+Package: mlDEA
+Type: Package
+Title: Malmquist-Luenberger DEA Sequential Technology
+Version: 0.1.0
+Authors@R:
+    person("Nahum Caleb", "Juarez Espinosa",
+           email = "nahumcaleb03@gmail.com",
+           role = c("aut", "cre"))
+Description: Provides helpers to build sequential DEA technology sets and
+    solve the associated input-oriented (CCR) linear programming problems using
+    lpSolve. These routines act as the building block for Malmquist-Luenberger
+    productivity analysis.
+Depends: R (>= 3.6)
+Imports:
+    lpSolve
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+License: GPL-3
+URL: https://github.com/TuUsuario/mlDEA
+BugReports: https://github.com/TuUsuario/mlDEA/issues
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Config/testthat/edition: 3
