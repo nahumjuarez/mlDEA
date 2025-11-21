@@ -1,7 +1,6 @@
 # mlDEA
 
-`mlDEA` es un paquete R minimalista para resolver modelos DEA (Data Envelopment Analysis)  
-**input-oriented (CCR)** con **tecnología secuencial indirecta**.  
+`mlDEA` es un paquete de R para resolver modelos DEA (Data Envelopment Analysis) **input-oriented (CCR)** con **tecnología secuencial indirecta**.  
 
 Su objetivo es proveer el **bloque de optimización** que se necesita en análisis de productividad tipo Malmquist / Malmquist-Luenberger;  
 la construcción del índice completo se deja explícitamente para versiones posteriores.
