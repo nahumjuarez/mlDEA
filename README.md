@@ -29,33 +29,69 @@ cálculo del índice completo no está incluido en esta versión.
 
 ## Resultados que devuelve
 
-Ambas funciones retornan una lista con las siguientes entradas principales:
+Ambas funciones retornan una lista con:
 
-- `theta`: puntuación de eficiencia radial (≤ 1 para DMUs eficientes, bajo la convención input-oriented).
-- `lambdas`: pesos óptimos asignados a las observaciones de referencia.
-- `x_opt`: combinación lineal óptima de inputs sobre la frontera secuencial.
-- `y_opt`: outputs proyectados sobre la frontera (en input-oriented, coinciden con `y0`).
-- `status`: código de salida de `lpSolve::lp()` (0 = solución óptima).
-- `status_message`: texto explicando el código de estado del solver.
+- `theta`: puntaje de eficiencia radial.
+- `lambdas`: pesos óptimos.
+- `x_opt`: inputs proyectados.
+- `y_opt`: outputs proyectados.
+- `status`: código del solver.
+- `status_message`: explicación del estado del solver.
 
-`dea_seq_indirect()` agrega además:
+`dea_seq_indirect()` agrega:
 
-- `reference_data`: subconjunto del panel usado para construir la tecnología (todas las filas con tiempo ≤ `period`).
-- `target`: registro original de la DMU objetivo (útil para verificar inputs/outputs observados).
+- `reference_data`: subconjunto del panel con tecnología ≤ periodo.
+- `target`: registro original de la DMU evaluada.
 
 ## Parámetros de saneamiento de datos
 
-- `na_rm` (`FALSE` por defecto):  
-  - Si es `TRUE`, las observaciones de referencia con NA se eliminan antes de formar la tecnología  
-    (la DMU objetivo siempre debe estar completa).  
-  - Si es `FALSE`, se lanza un error si se detectan NA.
-- `allow_negative` (`FALSE` por defecto):  
-  define si se permiten valores negativos en inputs/outputs. Útil cuando se modelan balances netos,
-  emisiones netas, etc.
+- **`na_rm`**: controla si se eliminan referencias con valores NA.  
+- **`allow_negative`**: permite o no valores negativos en los datos.
 
-## Instalación local
+---
+
+## Instalación
+
+Existen dos formas de instalar `mlDEA`:
+
+### 1. Instalación recomendada (desde GitHub)
 
 ```r
-# Ubícate en el directorio padre de la carpeta mlDEA
-setwd("C:/Users/Nahum Caleb/Documents/Proyectos/Libreria de Malmquist-Luenberger")
-install.packages("mlDEA", repos = NULL, type = "source")
+install.packages("remotes")
+remotes::install_github("nahumjuarez/mlDEA")
+library(mlDEA)
+````
+**2. Instalación desde carpeta local**
+
+setwd("ruta/donde/esta/la/carpeta/mlDEA")
+install.packages(".", repos = NULL, type = "source")
+library(mlDEA)
+
+
+**Ejemplo mínimo de uso**
+
+library(mlDEA)
+
+# Panel de ejemplo
+data_example <- data.frame(
+  id   = c("A", "A", "B", "B"),
+  year = c(1,   2,   1,   2),
+  x1   = c(5,   4,   6,   5),
+  y1   = c(10, 11,  9,  10)
+)
+
+# Evaluar la DMU "A" en el periodo 2 usando tecnología secuencial indirecta
+res <- dea_seq_indirect(
+  data        = data_example,
+  id_col      = "id",
+  time_col    = "year",
+  input_cols  = "x1",
+  output_cols = "y1",
+  dmu_id      = "A",
+  period      = 2
+)
+
+res$theta      # eficiencia
+res$lambdas    # pesos óptimos
+res$x_opt      # inputs proyectados
+res$y_opt      # outputs proyectados
