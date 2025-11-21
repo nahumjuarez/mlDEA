@@ -1,9 +1,17 @@
 # mlDEA
 
-`mlDEA` es un paquete de R para resolver modelos DEA (Data Envelopment Analysis) **input-oriented (CCR)** con **tecnología secuencial indirecta**.  
+`mlDEA` es un paquete R que implementa el núcleo de optimización para
+evaluar eficiencia técnica bajo tecnología secuencial indirecta.
 
-Su objetivo es proveer el **bloque de optimización** que se necesita en análisis de productividad tipo Malmquist / Malmquist-Luenberger;  
-la construcción del índice completo se deja explícitamente para versiones posteriores.
+**Proporciona:**
+
+- un solver DEA input-oriented (CCR), y
+- un módulo para construir tecnología secuencial (periodos ≤ t)
+  y proyectar una DMU objetivo sobre dicha frontera.
+
+Este bloque corresponde exactamente a los programas lineales usados en
+la parte base del índice Malmquist / Malmquist-Luenberger, aunque el
+cálculo del índice completo no está incluido en esta versión.
 
 ## Problema que resuelve
 
