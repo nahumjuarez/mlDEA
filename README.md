@@ -63,16 +63,19 @@ library(mlDEA)
 ````
 **2. Instalación desde carpeta local**
 
+```r
 setwd("ruta/donde/esta/la/carpeta/mlDEA")
 install.packages(".", repos = NULL, type = "source")
 library(mlDEA)
+```
 
 
 **Ejemplo mínimo de uso**
 
-library(mlDEA)
+`library(mlDEA)`
 
 # Panel de ejemplo
+```r
 data_example <- data.frame(
   id   = c("A", "A", "B", "B"),
   year = c(1,   2,   1,   2),
@@ -81,15 +84,15 @@ data_example <- data.frame(
 )
 
 # Evaluar la DMU "A" en el periodo 2 usando tecnología secuencial indirecta
-res <- dea_seq_indirect(
-  data        = data_example,
-  id_col      = "id",
-  time_col    = "year",
-  input_cols  = "x1",
-  output_cols = "y1",
-  dmu_id      = "A",
-  period      = 2
-)
+- res <- dea_seq_indirect(
+-  data        = data_example,
+-  id_col      = "id",
+-  time_col    = "year",
+-  input_cols  = "x1",
+-  output_cols = "y1",
+-  dmu_id      = "A",
+-  period      = 2
+-)
 
 res$theta      # eficiencia
 res$lambdas    # pesos óptimos
